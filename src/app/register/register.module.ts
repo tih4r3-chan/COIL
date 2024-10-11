@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
 
 import { RegisterPageRoutingModule } from './register-routing.module';
-
 import { RegisterPage } from './register.page';
 
 @NgModule({
@@ -17,4 +15,4 @@ import { RegisterPage } from './register.page';
   ],
   declarations: [RegisterPage]
 })
-export class RegisterPageModule {}
+export class RegisterPageModule {}  // Asegúrate de que este sea el nombre correcto

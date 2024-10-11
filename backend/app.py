@@ -2,9 +2,10 @@
 
 from flask import Flask, request, jsonify
 import openai
-import db
+from db import db_session
 import psycopg2
 import bcrypt
+from models import User
 
 app = Flask(__name__)
 
@@ -49,25 +50,24 @@ def register():
         cur.close()
         conn.close()
 
-# Ruta para login
-@app.route('/login', methods=['POST'])
-def login():
-    data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
-
-    conn = db.get_db_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT password FROM users WHERE username = %s", (username,))
-    user = cur.fetchone()
-
-    if user and bcrypt.checkpw(password.encode('utf-8'), user[0].encode('utf-8')):
-        return jsonify({"message": "Login successful"}), 200
-    else:
-        return jsonify({"message": "Invalid username or password"}), 401
-    finally:
-        cur.close()
-        conn.close()
+@app.route('/register', methods=['POST'])
+def register():
+    data = request.json
+    new_user = User(
+        full_name=data['fullName'],
+        username=data['username'],
+        weight=data['weight'],
+        height=data['height'],
+        age=data['age'],
+        gender=data['gender'],
+        goal=data['goal'],
+        physical_activity_level=data['physicalActivityLevel'],
+        health_conditions=','.join(data['healthConditions']),  # convert list to comma-separated string
+        password_hash=hash_password(data['password'])  # función para hash de la contraseña
+    )
+    db_session.add(new_user)
+    db_session.commit()
+    return jsonify({'message': 'User registered successfully'})
     
 if __name__ == "__main__":
  app.run(debug=True)
