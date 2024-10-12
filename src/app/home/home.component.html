@@ -1,0 +1,22 @@
+<!-- home.component.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Asistente de Salud</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Pregunta a la IA</ion-label>
+    <ion-input [(ngModel)]="question"></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" (click)="askQuestion()">Enviar</ion-button>
+
+  <ion-card *ngIf="answer">
+    <ion-card-header>
+      <ion-card-title>Respuesta de la IA</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>{{ answer }}</ion-card-content>
+  </ion-card>
+</ion-content>

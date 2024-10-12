@@ -5,66 +5,14 @@
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="onRegister()">
-    <ion-item>
-      <ion-label position="floating">Nombre Completo</ion-label>
-      <ion-input type="text" [(ngModel)]="user.fullName" name="fullName" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Nombre de Usuario</ion-label>
-      <ion-input type="text" [(ngModel)]="user.username" name="username" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Peso (kg)</ion-label>
-      <ion-input type="number" [(ngModel)]="user.weight" name="weight" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Estatura (cm)</ion-label>
-      <ion-input type="number" [(ngModel)]="user.height" name="height" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Edad</ion-label>
-      <ion-input type="number" [(ngModel)]="user.age" name="age" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Género</ion-label>
-      <ion-select [(ngModel)]="user.gender" name="gender" required>
-        <ion-select-option value="male">Masculino</ion-select-option>
-        <ion-select-option value="female">Femenino</ion-select-option>
-        <ion-select-option value="other">Otro</ion-select-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Meta</ion-label>
-      <ion-select [(ngModel)]="user.goal" name="goal" required>
-        <ion-select-option value="lose_weight">Perder peso</ion-select-option>
-        <ion-select-option value="gain_weight">Ganar peso</ion-select-option>
-        <ion-select-option value="gain_muscle">Ganar masa muscular</ion-select-option>
-        <ion-select-option value="maintain_health">Cuidar mi salud</ion-select-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Nivel de actividad física (veces por semana)</ion-label>
-      <ion-input type="number" [(ngModel)]="user.physicalActivityLevel" name="physicalActivityLevel" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Enfermedades</ion-label>
-      <ion-select [(ngModel)]="user.healthConditions" name="healthConditions" multiple="true">
-        <ion-select-option value="diabetes">Diabetes</ion-select-option>
-        <ion-select-option value="hypertension">Hipertensión</ion-select-option>
-        <ion-select-option value="kidney_disease">Enfermedad renal</ion-select-option>
-        <ion-select-option value="other">Otra</ion-select-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-button expand="full" type="submit">Registrar</ion-button>
-  </form>
+  <div style="padding: 16px;">
+    <h2>Formulario de Registro</h2>
+    <form (ngSubmit)="onRegister()">
+      <ion-item>
+        <ion-label position="floating">Nombre Completo</ion-label>
+        <ion-input type="text" [(ngModel)]="user.fullName" name="fullName" required></ion-input>
+      </ion-item>
+      <ion-button expand="full" type="submit">Registrar</ion-button>
+    </form>
+  </div>
 </ion-content>

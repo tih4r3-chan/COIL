@@ -1,16 +1,19 @@
-#app.py
+""" app.py """
 
 from flask import Flask, request, jsonify
 import openai
-from db import db_session
-import psycopg2
-import bcrypt
+from db import db_session, init_db
 from models import User
+import bcrypt
+import psycopg2
 
 app = Flask(__name__)
 
+# Inicializar la base de datos
+init_db()
+
 # Configuración de OpenAI API
-openai.api_key = "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"
+openai.api_key = "sk-your-api-key"
 
 @app.route('/ask', methods=['POST'])
 def ask():
@@ -25,8 +28,6 @@ def ask():
     )
     return jsonify({"answer": response.choices[0].text.strip()})
 
-
-
 # Ruta para registrar usuario
 @app.route('/register', methods=['POST'])
 def register():
@@ -37,37 +38,24 @@ def register():
     # Encriptar la contraseña
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-    conn = db.get_db_connection()
-    cur = conn.cursor()
-    try:
-        cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, hashed_password))
-        conn.commit()
-        return jsonify({"message": "User registered successfully"}), 201
-    except Exception as e:
-        conn.rollback()
-        return jsonify({"error": str(e)}), 500
-    finally:
-        cur.close()
-        conn.close()
-
-@app.route('/register', methods=['POST'])
-def register():
-    data = request.json
     new_user = User(
-        full_name=data['fullName'],
-        username=data['username'],
-        weight=data['weight'],
-        height=data['height'],
-        age=data['age'],
-        gender=data['gender'],
-        goal=data['goal'],
-        physical_activity_level=data['physicalActivityLevel'],
-        health_conditions=','.join(data['healthConditions']),  # convert list to comma-separated string
-        password_hash=hash_password(data['password'])  # función para hash de la contraseña
+        full_name=data.get('fullName'),
+        username=username,
+        weight=data.get('weight'),
+        height=data.get('height'),
+        age=data.get('age'),
+        gender=data.get('gender'),
+        goal=data.get('goal'),
+        physical_activity_level=data.get('physicalActivityLevel'),
+        health_conditions=','.join(data.get('healthConditions', [])),  # convertimos lista a string
+        password_hash=hashed_password
     )
+
     db_session.add(new_user)
     db_session.commit()
-    return jsonify({'message': 'User registered successfully'})
-    
+
+    return jsonify({'message': 'User registered successfully'}), 201
+
+# Arrancar servidor
 if __name__ == "__main__":
- app.run(debug=True)
+    app.run(debug=True)
