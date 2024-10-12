@@ -1,5 +1,4 @@
-/* register.page.ts */
-
+import { UserService } from '../user.service'; // Importar el servicio de usuario
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
@@ -22,7 +21,7 @@ export class RegisterPage {
     healthConditions: []
   };
 
-  constructor(private navCtrl: NavController, private http: HttpClient) {}
+  constructor(private navCtrl: NavController, private http: HttpClient, private userService: UserService) {}
 
   // Función para manejar el envío del formulario de registro
   onRegister() {
@@ -33,7 +32,7 @@ export class RegisterPage {
       console.log('Datos de usuario:', this.user);
 
       // Enviar los datos al backend
-      this.http.post('http://localhost:8100/register', this.user).subscribe(
+      this.http.post('http://localhost:5000/register', this.user).subscribe( // Asegúrate de que esta URL sea correcta
         (response: any) => {
           console.log('Registro exitoso:', response);
           alert('Registro exitoso');
