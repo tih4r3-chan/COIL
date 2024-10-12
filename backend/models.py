@@ -1,3 +1,5 @@
+""" models.py """
+
 from sqlalchemy import Column, Integer, String, Float, Text
 from db import Base
 
