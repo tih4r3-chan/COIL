@@ -1,5 +1,3 @@
-""" models.py """
-
 from sqlalchemy import Column, Integer, String, Text, ForeignKey, Date, Float
 from sqlalchemy.orm import relationship
 from db import Base
@@ -46,6 +44,5 @@ class Meal(Base):
 User.activities = relationship("Activity", back_populates="user")
 User.meals = relationship("Meal", back_populates="user")
 
-
 def __repr__(self):
-        return f'<User {self.username}>'
+    return f'<User {self.username}>'

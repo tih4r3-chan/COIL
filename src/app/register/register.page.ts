@@ -1,4 +1,6 @@
-import { UserService } from '../user.service'; // Importar el servicio de usuario
+/* register.page.ts */
+
+import { UserService } from '../services/user.service';
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
@@ -12,6 +14,7 @@ export class RegisterPage {
   user = {
     fullName: '',
     username: '',
+    password: '',  // Asegúrate de incluir este campo
     weight: null,
     height: null,
     age: null,
@@ -25,14 +28,15 @@ export class RegisterPage {
 
   // Función para manejar el envío del formulario de registro
   onRegister() {
-    if (this.user.fullName && this.user.username && this.user.weight !== null &&
-        this.user.height !== null && this.user.age !== null &&
-        this.user.gender && this.user.goal && this.user.physicalActivityLevel !== null) {
+    if (this.user.fullName && this.user.username && this.user.password && // Agrega la verificación de contraseña
+        this.user.weight !== null && this.user.height !== null &&
+        this.user.age !== null && this.user.gender && 
+        this.user.goal && this.user.physicalActivityLevel !== null) {
       
       console.log('Datos de usuario:', this.user);
 
       // Enviar los datos al backend
-      this.http.post('http://localhost:5000/register', this.user).subscribe( // Asegúrate de que esta URL sea correcta
+      this.http.post('http://localhost:5000/register', this.user).subscribe(
         (response: any) => {
           console.log('Registro exitoso:', response);
           alert('Registro exitoso');
@@ -40,7 +44,7 @@ export class RegisterPage {
         },
         (error) => {
           console.error('Error al registrar usuario:', error);
-          alert('Error al registrar usuario. Por favor, intenta nuevamente.');
+          alert('Error al registrar usuario: ' + error.error.message || error.message); // Muestra el mensaje de error
         }
       );
     } else {

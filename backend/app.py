@@ -1,11 +1,11 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import openai
-from db import db_session, init_db, insert_user_data  # Asegúrate de tener insert_user_data aquí si lo usas
-from models import User, Activity, Meal  # Asegúrate de que estos modelos existan en tu archivo models.py
+from db import db_session, init_db
+from models import User, Activity, Meal
 import bcrypt
-import jwt  # Para manejar JWT
-import datetime  # Para manejar la expiración del token
+import jwt
+import datetime
 
 app = Flask(__name__)
 CORS(app)  # Esto habilita CORS para todas las rutas
@@ -33,33 +33,40 @@ def ask():
 @app.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
+    
+    # Verificar que todos los campos están presentes
+    required_fields = ['username', 'password', 'fullName', 'weight', 'height', 'age', 'gender', 'goal', 'physicalActivityLevel', 'healthConditions']
+    for field in required_fields:
+        if field not in data:
+            return jsonify({'message': f'{field} es requerido.'}), 400
+
+    username = data['username']
+    password = data['password']
 
     # Verificar si el usuario ya existe
     if db_session.query(User).filter_by(username=username).first():
-        return jsonify({'message': 'Username already exists'}), 400
+        return jsonify({'message': 'El nombre de usuario ya existe'}), 400
 
     # Encriptar la contraseña
-    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')  # Cambiado a string
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
     new_user = User(
-        full_name=data.get('fullName'),
+        full_name=data['fullName'],
         username=username,
-        weight=data.get('weight'),
-        height=data.get('height'),
-        age=data.get('age'),
-        gender=data.get('gender'),
-        goal=data.get('goal'),
-        physical_activity_level=data.get('physicalActivityLevel'),
-        health_conditions=','.join(data.get('healthConditions', [])),  # Convertimos lista a string
+        weight=data['weight'],
+        height=data['height'],
+        age=data['age'],
+        gender=data['gender'],
+        goal=data['goal'],
+        physical_activity_level=data['physicalActivityLevel'],
+        health_conditions=data['healthConditions'],
         password_hash=hashed_password
     )
 
     db_session.add(new_user)
     db_session.commit()
 
-    return jsonify({'message': 'User registered successfully'}), 201
+    return jsonify({'message': 'Usuario registrado exitosamente'}), 201
 
 # Ruta para iniciar sesión
 @app.route('/login', methods=['POST'])
@@ -68,6 +75,10 @@ def login():
     username = data.get('username')
     password = data.get('password')
 
+    # Verificar que los campos de inicio de sesión estén presentes
+    if not username or not password:
+        return jsonify({'message': 'Usuario y contraseña son requeridos'}), 400
+
     user = db_session.query(User).filter_by(username=username).first()
 
     if user and bcrypt.checkpw(password.encode('utf-8'), user.password_hash.encode('utf-8')):
@@ -75,13 +86,13 @@ def login():
         token = jwt.encode({
             'user_id': user.id,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)  # El token expira en 1 hora
-        }, "your_secret_key", algorithm='HS256')
+        }, "your_secret_key", algorithm='HS256')  # Cambia 'your_secret_key' por una clave secreta adecuada
 
         return jsonify({'token': token}), 200
     else:
-        return jsonify({'message': 'Invalid credentials'}), 401
+        return jsonify({'message': 'Credenciales inválidas'}), 401
 
-# Ruta para agregar una actividad
+# Rutas para agregar actividades y comidas
 @app.route('/activities', methods=['POST'])
 def add_activity():
     data = request.get_json()
@@ -95,7 +106,6 @@ def add_activity():
     db_session.commit()
     return jsonify({'message': 'Actividad registrada exitosamente'}), 201
 
-# Ruta para agregar una comida
 @app.route('/meals', methods=['POST'])
 def add_meal():
     data = request.get_json()
@@ -111,5 +121,5 @@ def add_meal():
     return jsonify({'message': 'Comida registrada exitosamente'}), 201
 
 # Arrancar servidor
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)

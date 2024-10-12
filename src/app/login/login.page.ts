@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -13,26 +14,23 @@ export class LoginPage {
     password: ''
   };
 
-  constructor(private navCtrl: NavController, private http: HttpClient) {}
+  constructor(private userService: UserService, private router: Router, private http: HttpClient) {}
 
   onLogin() {
     if (this.credentials.username && this.credentials.password) {
-      // Aquí realizarás la solicitud al backend para autenticar al usuario
-      this.http.post('http://database-1.clck8ocoinkm.us-east-2.rds.amazonaws.com/api/login', this.credentials)
-        .subscribe(
-          (response: any) => {
-            console.log('Inicio de sesión exitoso', response);
-            // Aquí puedes redirigir a la página de perfil o inicio
-            // this.navCtrl.navigateForward('/perfil');
-            alert('Inicio de sesión exitoso');
-          },
-          error => {
-            console.error('Error al iniciar sesión', error);
-            alert('Nombre de usuario o contraseña incorrectos.');
-          }
-        );
+      this.http.post('http://localhost:5000/login', this.credentials).subscribe(
+        (response: any) => {
+          this.userService.setToken(response.token);
+          alert('Inicio de sesión exitoso');
+          this.router.navigate(['/home']); // Redirigir a la página de inicio
+        },
+        (error) => {
+          console.error('Error al iniciar sesión:', error);
+          alert('Error al iniciar sesión: ' + error.error.message || error.message);
+        }
+      );
     } else {
-      alert('Por favor, completa todos los campos obligatorios.');
+      alert('Por favor, completa todos los campos.');
     }
   }
 }
