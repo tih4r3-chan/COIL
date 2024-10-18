@@ -1,12 +1,10 @@
-/* app-routing.module.ts */
-
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'tabs',
+    redirectTo: 'tabs',  // Redirige a 'tabs' al cargar la app
     pathMatch: 'full'
   },
   {
@@ -15,13 +13,12 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
   }
-
 ];
 
 @NgModule({

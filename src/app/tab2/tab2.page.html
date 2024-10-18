@@ -1,17 +1,86 @@
-<ion-header [translucent]="true">
+<!-- tab2.page.html -->
+
+
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title>Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <!-- Saludo y detalles del usuario -->
+  <div class="welcome-section">
+    <h1>Hola, {{userName}}</h1>
+    <p>Es hora de desafiar tus límites.</p>
+  </div>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <!-- Ejercicios recomendados -->
+  <div class="exercises-section">
+    <h2>Ejercicios</h2>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-card>
+            <img src="assets/images/run.jpg" />
+            <ion-card-header>
+              <ion-card-title>Trotar</ion-card-title>
+              <ion-card-subtitle>30 Minutos - 200 Kcal</ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card>
+            <img src="assets/images/bike.jpg" />
+            <ion-card-header>
+              <ion-card-title>Andar en bicicleta</ion-card-title>
+              <ion-card-subtitle>1 Hora - 550 Kcal</ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-button expand="full" fill="outline">Ver Más</ion-button>
+    </ion-grid>
+  </div>
+
+  <!-- Consejo del día -->
+  <div class="tip-section">
+    <h2>Consejo Del Día</h2>
+    <p>{{dailyTip}}</p>
+  </div>
+
+  <!-- Consejos adicionales -->
+  <div class="advice-section">
+    <h2>Consejos</h2>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-card>
+            <img src="assets/images/diet.jpg" />
+            <ion-card-header>
+              <ion-card-title>Lleva Un Registro De Tu Dieta</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card>
+            <img src="assets/images/training.jpg" />
+            <ion-card-header>
+              <ion-card-title>Realiza Actividad Diaria</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>
+
+<!-- Navegación inferior -->
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>Inicio</ion-button>
+      <ion-button>Progreso</ion-button>
+      <ion-button>Favoritos</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

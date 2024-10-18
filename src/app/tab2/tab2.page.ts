@@ -1,25 +1,15 @@
+/* tab2.page.ts */
+
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-activities',
-  templateUrl: './activities.page.html',
-  styleUrls: ['./activities.page.scss'],
+  selector: 'app-tab2',
+  templateUrl: './tab2.page.html',
+  styleUrls: ['./tab2.page.scss'],
 })
-export class ActivitiesPage {
-  activity = {
-    user_id: '',
-    activity_type: '',
-    description: '',
-    date: ''
-  };
+export class Tab2Page {
+  userName = 'Juan Carlos';  // Este será dinámico después con los datos del usuario
+  dailyTip = 'Come más frutas. Son ricas en fibra y te ayudarán a mantenerte saludable.';
 
-  constructor(private http: HttpClient) {}
-
-  addActivity() {
-    this.http.post('/activities', this.activity).subscribe(response => {
-      console.log('Actividad agregada', response);
-      // Reset form or show success message
-    });
-  }
+  constructor() {}
 }
