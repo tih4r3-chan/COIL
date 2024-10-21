@@ -31,7 +31,7 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
+            "styles": ["src/global.scss", "src/theme/variables.scss", "node_modules/swiper/swiper-bundle.min.css"],
             "scripts": []
           },
           "configurations": {
@@ -80,7 +80,6 @@
               "buildTarget": "app:build:development"
             },
             "ci": {
-              "progress": false
             }
           },
           "defaultConfiguration": "development"

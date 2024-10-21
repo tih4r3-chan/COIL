@@ -1,10 +1,9 @@
+// onboarding.module.ts
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
-import { SwiperModule } from 'swiper/angular';  // Asegúrate de importar Swiper
-
+import { OnboardingPageRoutingModule } from './onboarding-routing.module';
 import { OnboardingPage } from './onboarding.page';
 
 @NgModule({
@@ -12,8 +11,7 @@ import { OnboardingPage } from './onboarding.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild([{ path: '', component: OnboardingPage }]),
-    SwiperModule, // Aquí añadimos Swiper
+    OnboardingPageRoutingModule,
   ],
   declarations: [OnboardingPage]
 })
