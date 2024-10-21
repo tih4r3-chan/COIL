@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'tabs',  // Redirige a 'tabs' al cargar la app
+    redirectTo: 'tabs',
     pathMatch: 'full'
   },
   {
@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
+  },
+  {
+    path: 'tabs/tab2',
+    loadChildren: () => import('./tab2/tab2.module').then(m => m.Tab2PageModule)
   }
 ];
 
