@@ -1,0 +1,22 @@
+<swiper [slidesPerView]="1" pagination="true" navigation="true" scrollbar="true">
+  <ng-template swiperSlide>
+    <div class="slide-content">
+      <h2>Bienvenido a FitFocus</h2>
+      <p>Empieza tu camino hacia una vida saludable.</p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-content">
+      <h2>Consejos personalizados</h2>
+      <p>Recibe recomendaciones adaptadas a tus necesidades.</p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-content">
+      <h2>Únete a la comunidad</h2>
+      <p>Comparte tu progreso con otros usuarios.</p>
+    </div>
+  </ng-template>
+</swiper>
+
+<ion-button expand="block" (click)="finishOnboarding()">Empezar</ion-button>
