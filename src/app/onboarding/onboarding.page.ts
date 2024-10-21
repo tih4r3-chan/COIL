@@ -32,6 +32,6 @@ export class OnboardingPage implements AfterViewInit {
     // Guarda que el onboarding ha sido completado usando notación de corchetes
     await this.storage['set']('onboardingComplete', true);
     // Navega a la página principal
-    this.router.navigate(['/home']);
+    this.router.navigate(['/register']);
   }
 }

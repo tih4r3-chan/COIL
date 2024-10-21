@@ -1,5 +1,9 @@
+/* app-routing.module.ts */
+
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { OnboardingPage } from './onboarding/onboarding.page';
+import { LoginPage } from './login/login.page';
 
 const routes: Routes = [
   {
@@ -22,11 +26,14 @@ const routes: Routes = [
   {
     path: 'tabs/tab2',
     loadChildren: () => import('./tab2/tab2.module').then(m => m.Tab2PageModule)
-  },  {
+  },
+  {
     path: 'onboarding',
     loadChildren: () => import('./onboarding/onboarding.module').then( m => m.OnboardingPageModule)
-  }
+  },
 
+
+  
 ];
 
 @NgModule({
