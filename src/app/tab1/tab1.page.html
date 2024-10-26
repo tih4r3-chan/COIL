@@ -1,37 +1,15 @@
-<form (ngSubmit)="submitForm()">
-  <ion-item>
-    <ion-label>Peso</ion-label>
-    <ion-input type="number" [(ngModel)]="formData.peso" name="peso"></ion-input>
-  </ion-item>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Chatbot</ion-title>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content>
+  <div *ngFor="let message of messages" [ngClass]="{'user-message': message.role === 'user', 'assistant-message': message.role === 'assistant'}">
+    <strong>{{ message.role }}:</strong> {{ message.content }}
+  </div>
   <ion-item>
-    <ion-label>Distribución de Grasa</ion-label>
-    <ion-input [(ngModel)]="formData.distribucionGrasa" name="distribucionGrasa"></ion-input>
+    <ion-input [(ngModel)]="userInput" placeholder="Escribe tu mensaje..."></ion-input>
+    <ion-button (click)="sendMessage()">Enviar</ion-button>
   </ion-item>
-
-  <ion-item>
-    <ion-label>Antecedentes Familiares</ion-label>
-    <ion-input [(ngModel)]="formData.antecedentesFamiliares" name="antecedentesFamiliares"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Edad</ion-label>
-    <ion-input type="number" [(ngModel)]="formData.edad" name="edad"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Prediabetes</ion-label>
-    <ion-select [(ngModel)]="formData.predediabetes" name="predediabetes">
-      <ion-select-option value="si">Sí</ion-select-option>
-      <ion-select-option value="no">No</ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Alimentación</ion-label>
-    <ion-input [(ngModel)]="formData.alimentacion" name="alimentacion"></ion-input>
-  </ion-item>
-
-  
-  <ion-button type="submit">Enviar</ion-button>
-</form>
+</ion-content>
