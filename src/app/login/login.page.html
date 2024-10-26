@@ -1,15 +1,41 @@
-<!-- login.page.html -->
 <ion-header>
   <ion-toolbar>
     <ion-title>Iniciar Sesión</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <<form (ngSubmit)="onLogin()">
-    <ion-input type="text" [(ngModel)]="credentials.username" name="username" required></ion-input>
-    <ion-input type="password" [(ngModel)]="credentials.password" name="password" required></ion-input>
-    <ion-button type="submit">Iniciar Sesión</ion-button>
-  </form>
-  
+<ion-content class="ion-padding">
+  <div class="login-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Bienvenido a FitFocus</ion-card-title>
+        <ion-card-subtitle>Inicia sesión para continuar</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form (ngSubmit)="onLogin()">
+          <ion-item>
+            <ion-label position="floating">Usuario</ion-label>
+            <ion-input type="text" [(ngModel)]="credentials.username" name="username" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input type="password" [(ngModel)]="credentials.password" name="password" required></ion-input>
+          </ion-item>
+
+          <ion-button expand="block" type="submit" class="ion-margin-top">
+            Iniciar Sesión
+          </ion-button>
+        </form>
+
+        <div class="ion-text-center ion-margin-top">
+          <ion-text>¿No tienes una cuenta?</ion-text>
+          <ion-button fill="clear" (click)="goToRegister()">
+            Regístrate aquí
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
