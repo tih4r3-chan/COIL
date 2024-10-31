@@ -1,8 +1,9 @@
-// onboarding.page.ts
+// src/app/onboarding/onboarding.page.ts
 import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Storage } from '@ionic/storage-angular'; // Asegúrate de importar Storage
-import Swiper from 'swiper'; // Asegúrate de que Swiper esté instalado
+import { Storage } from '@ionic/storage-angular';
+import Swiper from 'swiper';
+import { OnboardingService } from '../services/onboarding.service';
 
 @Component({
   selector: 'app-onboarding',
@@ -10,11 +11,14 @@ import Swiper from 'swiper'; // Asegúrate de que Swiper esté instalado
   styleUrls: ['./onboarding.page.scss'],
 })
 export class OnboardingPage implements AfterViewInit {
-  constructor(private router: Router, private storage: Storage) {}
+  constructor(
+    private router: Router,
+    private storage: Storage,
+    private onboardingService: OnboardingService
+  ) {}
 
   ngAfterViewInit() {
     const swiper = new Swiper('.swiper-container', {
-      // Opciones de Swiper, puedes personalizar según tus necesidades
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
@@ -29,9 +33,11 @@ export class OnboardingPage implements AfterViewInit {
   }
 
   async finishOnboarding() {
-    // Guarda que el onboarding ha sido completado usando notación de corchetes
-    await this.storage['set']('onboardingComplete', true);
-    // Navega a la página principal
-    this.router.navigate(['/register']);
+    try {
+      await this.onboardingService.setOnboardingComplete();
+      await this.router.navigate(['/register']);
+    } catch (error) {
+      console.error('Error al finalizar el onboarding:', error);
+    }
   }
 }

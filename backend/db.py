@@ -5,8 +5,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-# Configuración de la base de datos local
-DATABASE_URL = 'postgresql://postgres:G20497699-61@localhost:5432/coil_db'  # Cambia 'database_name' por tu nombre de base de datos local
+# Configuración de la base de datos nube
+DATABASE_URL = 'postgresql://postgres:Coil2024@database-1.cjf4a6x7rwd4.us-east-1.rds.amazonaws.com:5432/'
 
 # Crear el motor de SQLAlchemy
 engine = create_engine(DATABASE_URL)
@@ -17,9 +17,9 @@ Base = declarative_base()
 def get_db_connection():
     try:
         connection = psycopg2.connect(
-            host='localhost',  # Cambia a la dirección de tu RDS si es necesario
-            database='database_name',  # Cambia a tu nombre de base de datos local
-            user='postgres',
+            host='database-1.cjf4a6x7rwd4.us-east-1.rds.amazonaws.com',  # Cambia a la dirección de tu RDS si es necesario
+            database='postgres',  # Cambia a tu nombre de base de datos nube
+            user='coil',
             password='Coil2024'
         )
         return connection
