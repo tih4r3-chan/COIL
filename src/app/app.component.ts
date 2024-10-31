@@ -1,3 +1,5 @@
+// src/app/app.component.ts
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
@@ -19,15 +21,23 @@ export class AppComponent {
 
   async initializeApp() {
     try {
+      console.log('Iniciando la aplicación...');
       await this.platform.ready();
+      console.log('Plataforma lista');
       await this.onboardingService.init();
+      console.log('Servicio de onboarding inicializado');
+
+      // Descomenta la siguiente línea para resetear el onboarding (solo para pruebas)
+      await this.onboardingService.resetOnboarding();
       
-      // Agregamos await aquí
       const hasSeenOnboarding = await this.onboardingService.hasSeenOnboarding();
+      console.log('¿Ha visto el onboarding?', hasSeenOnboarding);
       
       if (hasSeenOnboarding) {
+        console.log('Navegando a login');
         await this.router.navigateByUrl('/login');
       } else {
+        console.log('Navegando a onboarding');
         await this.router.navigateByUrl('/onboarding');
       }
     } catch (error) {

@@ -9,11 +9,10 @@ export class OnboardingService {
   private _storage: Storage | null = null;
 
   constructor(private storage: Storage) {
-    this.init(); // Inicializa el almacenamiento en el constructor
+    this.init();
   }
 
   async init() {
-    // Asegúrate de que el almacenamiento esté creado
     if (this._storage === null) {
       this._storage = await this.storage.create();
     }
@@ -30,10 +29,19 @@ export class OnboardingService {
   async hasSeenOnboarding(): Promise<boolean> {
     try {
       const value = await this._storage?.get(this.ONBOARDING_KEY);
-      return value === true; // Devuelve true si el onboarding ha sido visto
+      return value === true;
     } catch (error) {
       console.error('Error al obtener el estado del onboarding:', error);
-      return false; // Devuelve false en caso de error
+      return false;
+    }
+  }
+
+  async resetOnboarding() {
+    try {
+      await this._storage?.remove(this.ONBOARDING_KEY);
+      console.log('Estado de onboarding reseteado');
+    } catch (error) {
+      console.error('Error al resetear el estado del onboarding:', error);
     }
   }
 }

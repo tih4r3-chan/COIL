@@ -1,7 +1,5 @@
-// src/app/onboarding/onboarding.page.ts
 import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Storage } from '@ionic/storage-angular';
 import Swiper from 'swiper';
 import { OnboardingService } from '../services/onboarding.service';
 
@@ -13,7 +11,6 @@ import { OnboardingService } from '../services/onboarding.service';
 export class OnboardingPage implements AfterViewInit {
   constructor(
     private router: Router,
-    private storage: Storage,
     private onboardingService: OnboardingService
   ) {}
 
@@ -34,7 +31,9 @@ export class OnboardingPage implements AfterViewInit {
 
   async finishOnboarding() {
     try {
+      console.log('Finalizando onboarding...');
       await this.onboardingService.setOnboardingComplete();
+      console.log('Onboarding completado, navegando a registro');
       await this.router.navigate(['/register']);
     } catch (error) {
       console.error('Error al finalizar el onboarding:', error);
