@@ -5,8 +5,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-# Configuración de la base de datos nube
-DATABASE_URL = 'postgresql://postgres:Coil2024@database-1.cjf4a6x7rwd4.us-east-1.rds.amazonaws.com:5432/'
+# Configuración de la base de datos local
+DATABASE_URL = 'postgresql://postgres:Coil2024@localhost/myAppDB'
 
 # Crear el motor de SQLAlchemy
 engine = create_engine(DATABASE_URL)
@@ -15,17 +15,19 @@ db_session = Session()
 Base = declarative_base()
 
 def get_db_connection():
-    try:
-        connection = psycopg2.connect(
-            host='database-1.cjf4a6x7rwd4.us-east-1.rds.amazonaws.com',  # Cambia a la dirección de tu RDS si es necesario
-            database='postgres',  # Cambia a tu nombre de base de datos nube
-            user='coil',
-            password='Coil2024'
-        )
-        return connection
-    except psycopg2.OperationalError as e:
-        print(f"Error de conexión: {e}")
-        return None
+    # Intenta conectarse a la base de datos en AWS
+    # try:
+    #     connection = psycopg2.connect(
+    #         host='database-1.cjf4a6x7rwd4.us-east-1.rds.amazonaws.com',
+    #         database='nombre_de_tu_base_de_datos',
+    #         user='coil',
+    #         password='Coil2024'
+    #     )
+    #     return connection
+    # except psycopg2.OperationalError as e:
+    #     print(f"Error de conexión: {e}")
+    #     return None
+    return None  # Esto asegurará que no intente conectarse a AWS.
 
 def insert_user_data(user_data):
     conn = get_db_connection()
