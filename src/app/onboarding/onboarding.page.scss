@@ -1,24 +1,142 @@
-/* En styles.scss */
-@import 'swiper/swiper-bundle.css'; // Asegúrate de que la ruta sea correcta
+body {
+  background-color: #1a1a2e; /* Color de fondo oscuro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* Contenedor de Swiper */
+.swiper-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fondo de todos los slides */
+.swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  min-height: 80%;
+  background-color: #080d4f; /* Color de fondo */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagen en cada slide */
+.slide-image {
+  max-width: 80%;
+  height: auto;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+ion-button {
+  margin-top: 20px; /* Cambiado a 20px para separar más del texto anterior */
+  margin-bottom: 10px; /* Ajustado para espacio adecuado */
+  --background: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.5);
+  --border-radius: 20px; /* Bordes redondeados para el botón ovalado */
+  color: white;
+  font-weight: bold;
+  width: 80%;
+  max-width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Sombra */
+  text-transform: none;
+}
+
+.above-button-text {
+  font-size: 24px;
+  color: white;
+  margin: 10px 0;
+  text-align: center;
+  margin-bottom: 21px;
+  margin-top: -23px;
+}
 
 
-.slide-content {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  h1 {
-    font-size: 24px;
-    color: #fff;
-  }
-  
-  p {
-    font-size: 16px;
-    color: #ccc;
-  }
-  
-  ion-button {
-    --background: #6e44ff;
-    --color: white;
-  }
-  
+h2 {
+  margin-top: 18px;
+  font-size: 1.5rem;
+  font-size: 40px;
+}
+
+h3 {
+  margin-top: 18px;
+  font-size: 1.5rem;
+  font-size: 30px;
+}
+
+h4 {
+  margin-top: 18px;
+  font-size: 1.5rem;
+  font-size: 30px;
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #00bfff, #690f99); 
+  background-clip: text; 
+  color: transparent; 
+  font-weight: bold; 
+  font-size: 48px; 
+}
+
+
+.image-container {
+  position: relative; /* Necesario para posicionar el pseudo-elemento */
+  max-width: 80%; /* Cambia este valor según el tamaño que desees */
+  margin: 0 auto; /* Centra la imagen en el contenedor */
+}
+
+
+
+.slide-image[_ngcontent-ng-c736496235] {
+  max-width: 70%;
+  height: auto;
+  border-radius: 4px;
+  filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(400%) hue-rotate(270deg);
+  margin-top: -13px;
+  margin-bottom: 63px;
+}
+
+.image-container img {
+  position: relative; /* Para asegurar que la imagen esté debajo del degradado */
+  z-index: 0; /* La imagen está debajo del degradado */
+}
+
+
+.slide-image {
+  max-width: 40%;
+    height: auto;
+    border-radius: 8px;
+    filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(400%) hue-rotate(270deg);
+    margin-bottom: 78px;
+    margin-top: 5px;
+}
+
+.slide-image2 {
+  max-width: 33%;
+  height: auto;
+  border-radius: 8px;
+  filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(400%) hue-rotate(270deg);
+  margin-bottom: 39px;
+  margin-top: 57px;
+}
+
+.slide-image3 {
+  max-width: 33%;
+  height: auto;
+  border-radius: 8px;
+  filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(400%) hue-rotate(270deg);
+  margin-bottom: 39px;
+  margin-top: 25px;
+}
+
+
