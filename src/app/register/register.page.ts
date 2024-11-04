@@ -1,10 +1,10 @@
-/* register.page.ts */
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 
-interface User {
+// Interfaz para el formulario (con valores que pueden ser null)
+interface UserForm {
   fullName: string;
   username: string;
   password: string;
@@ -17,13 +17,27 @@ interface User {
   healthConditions: string[];
 }
 
+// Interfaz para el registro (sin valores null)
+interface RegisterUser {
+  fullName: string;
+  username: string;
+  password: string;
+  weight: number;
+  height: number;
+  age: number;
+  gender: string;
+  goal: string;
+  physicalActivityLevel: number;
+  healthConditions: string[]; // Cambiado a string[]
+}
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage {
-  user: User = {
+  user: UserForm = {
     fullName: '',
     username: '',
     password: '',
@@ -45,34 +59,36 @@ export class RegisterPage {
   async onRegister() {
     if (this.validateForm()) {
       try {
-        console.log('Datos de usuario:', this.user);
-        const response = await this.authService.register(this.user).toPromise();
-        console.log('Registro exitoso:', response);
-
-        // Guardar el token si viene en la respuesta
-        if (response && response.token) {
-          this.userService.setToken(response.token);
-        }
-
-        // Guardar los datos del usuario
-        this.userService.setUser({
+        const userData: RegisterUser = {
           fullName: this.user.fullName,
           username: this.user.username,
-          weight: this.user.weight,
-          height: this.user.height,
-          age: this.user.age,
+          password: this.user.password,
+          weight: this.user.weight!,
+          height: this.user.height!,
+          age: this.user.age!,
           gender: this.user.gender,
           goal: this.user.goal,
-          physicalActivityLevel: this.user.physicalActivityLevel,
+          physicalActivityLevel: this.user.physicalActivityLevel!,
           healthConditions: this.user.healthConditions
-        });
-
-        alert('Registro exitoso');
-        this.navCtrl.navigateForward('/login');
+        };
+  
+        console.log('Datos que se enviarán al servidor:', userData);
+  
+        const response = await this.authService.register(userData).toPromise();
+        console.log('Respuesta del servidor:', response);
+  
+        if (response && response.token) {
+          this.authService.setToken(response.token);
+          alert('Registro exitoso');
+          this.navCtrl.navigateForward('/login');
+        }
       } catch (error: any) {
-        console.error('Error al registrar usuario:', error);
-        const errorMessage = error.error?.message || error.message || 'Error desconocido';
-        alert('Error al registrar usuario: ' + errorMessage);
+        console.error('Error completo:', error);
+        if (error.error && error.error.message) {
+          alert(`Error del servidor: ${error.error.message}`);
+        } else {
+          alert('Error en el servidor. Por favor, intenta más tarde.');
+        }
       }
     } else {
       alert('Por favor, completa todos los campos obligatorios.');
@@ -82,11 +98,17 @@ export class RegisterPage {
   validateForm(): boolean {
     return !!(
       this.user.fullName &&
+      this.user.fullName.trim() &&
       this.user.username &&
+      this.user.username.trim() &&
       this.user.password &&
-      this.user.weight !== null &&
-      this.user.height !== null &&
-      this.user.age !== null &&
+      this.user.password.trim() &&
+      this.user.weight &&
+      this.user.weight > 0 &&
+      this.user.height &&
+      this.user.height > 0 &&
+      this.user.age &&
+      this.user.age > 0 &&
       this.user.gender &&
       this.user.goal &&
       this.user.physicalActivityLevel !== null
@@ -97,21 +119,26 @@ export class RegisterPage {
     this.navCtrl.navigateForward('/login');
   }
 
-  // Métodos auxiliares para la validación de campos individuales
-  isFieldValid(field: keyof User): boolean {
+  isFieldValid(field: keyof UserForm): boolean {
     if (field === 'weight' || field === 'height' || field === 'age' || field === 'physicalActivityLevel') {
-      return this.user[field] !== null;
+      return this.user[field] !== null && this.user[field]! > 0;
+    }
+    if (typeof this.user[field] === 'string') {
+      return (this.user[field] as string).trim().length > 0;
     }
     return !!this.user[field];
   }
 
-  // Método para manejar cambios en campos numéricos
   onNumberInput(event: any, field: 'weight' | 'height' | 'age' | 'physicalActivityLevel') {
     const value = event.target.value;
-    this.user[field] = value ? parseFloat(value) : null;
+    if (value === '' || value === null) {
+      this.user[field] = null;
+    } else {
+      const numValue = parseFloat(value);
+      this.user[field] = numValue > 0 ? numValue : null;
+    }
   }
 
-  // Método para manejar cambios en las condiciones de salud
   onHealthConditionChange(condition: string) {
     const index = this.user.healthConditions.indexOf(condition);
     if (index === -1) {
@@ -121,7 +148,6 @@ export class RegisterPage {
     }
   }
 
-  // Método para reiniciar el formulario
   resetForm() {
     this.user = {
       fullName: '',

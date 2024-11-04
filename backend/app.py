@@ -1,3 +1,4 @@
+""" app.py """
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import openai
@@ -50,23 +51,27 @@ def register():
     # Encriptar la contraseña
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
+    # Crear nuevo usuario
     new_user = User(
+        username=data['username'],
         full_name=data['fullName'],
-        username=username,
-        weight=data['weight'],
-        height=data['height'],
-        age=data['age'],
+        weight=float(data['weight']),
+        height=float(data['height']),
+        age=int(data['age']),
         gender=data['gender'],
         goal=data['goal'],
-        physical_activity_level=data['physicalActivityLevel'],
+        physical_activity_level=float(data['physicalActivityLevel']),
         health_conditions=data['healthConditions'],
-        password_hash=hashed_password
+        password_hash=hashed_password  # Aquí usamos password_hash en lugar de password
     )
 
-    db_session.add(new_user)
-    db_session.commit()
-
-    return jsonify({'message': 'Usuario registrado exitosamente'}), 201
+    try:
+        db_session.add(new_user)
+        db_session.commit()
+        return jsonify({'message': 'Usuario registrado exitosamente'}), 201
+    except Exception as e:
+        db_session.rollback()
+        return jsonify({'error': str(e)}), 500
 
 # Ruta para iniciar sesión
 @app.route('/login', methods=['POST'])
