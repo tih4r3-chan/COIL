@@ -6,6 +6,41 @@ body {
     height: 100vh;
 }
 
+.slide-image[_ngcontent-ng-c736496235] {
+    max-width: 70%;
+    height: auto;
+    border-radius: 4px;
+    filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(400%) hue-rotate(270deg);
+    margin-top: -13px;
+    margin-bottom: 63px;
+    
+  }
+
+  .image-container img {
+    position: relative; /* Para asegurar que la imagen esté debajo del degradado */
+    z-index: 0; /* La imagen está debajo del degradado */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  .slide-image {
+    max-width: 25%;
+      height: auto;
+      border-radius: 8px;
+      filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(400%) hue-rotate(270deg);
+      margin-bottom: 78px;
+      margin-top: 5px;
+  }
+  
+
+h2 {
+    margin-top: 18px;
+    font-size: 29px;
+    text-align: center;
+  }
+
 ion-content {
     display: flex;
     flex-direction: column;
@@ -51,7 +86,7 @@ ion-item {
 .input-container {
     background: #ffffff; /* Fondo blanco */
     border-radius: 10px; /* Bordes redondeados */
-    padding: 1px 16px; /* Espaciado interno */
+    padding: 0px 16px; /* Espaciado interno */
     color: #000000; /* Color del texto */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
     width: 100%; /* Abarca todo el ancho */
@@ -61,7 +96,7 @@ ion-item {
     color: #ffffff; /* Color blanco para los labels */
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 4px; /* Separación del input */
+    margin-bottom: 10px; /* Separación del input */
 }
 
 ion-button {
