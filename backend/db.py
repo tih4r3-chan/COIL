@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 # Configuración de la base de datos local
-DATABASE_URL = 'postgresql://postgres:Coil2024@localhost/myAppDB'
+DATABASE_URL = 'postgresql://postgres:Coil2024@localhost:5432/myAppDB'
 
 # Crear el motor de SQLAlchemy
 engine = create_engine(DATABASE_URL)

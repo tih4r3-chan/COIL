@@ -7,6 +7,7 @@ from models import User, Activity, Meal
 import bcrypt
 import jwt
 import datetime
+from db import init_db
 
 app = Flask(__name__)
 CORS(app)  # Esto habilita CORS para todas las rutas
@@ -35,7 +36,6 @@ def ask():
 def register():
     data = request.get_json()
     
-    # Verificar que todos los campos están presentes
     required_fields = ['username', 'password', 'fullName', 'weight', 'height', 'age', 'gender', 'goal', 'physicalActivityLevel', 'healthConditions']
     for field in required_fields:
         if field not in data:
@@ -44,14 +44,11 @@ def register():
     username = data['username']
     password = data['password']
 
-    # Verificar si el usuario ya existe
     if db_session.query(User).filter_by(username=username).first():
         return jsonify({'message': 'El nombre de usuario ya existe'}), 400
 
-    # Encriptar la contraseña
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
-    # Crear nuevo usuario
     new_user = User(
         username=data['username'],
         full_name=data['fullName'],
@@ -62,7 +59,7 @@ def register():
         goal=data['goal'],
         physical_activity_level=float(data['physicalActivityLevel']),
         health_conditions=data['healthConditions'],
-        password_hash=hashed_password  # Aquí usamos password_hash en lugar de password
+        password_hash=hashed_password
     )
 
     try:
@@ -72,6 +69,7 @@ def register():
     except Exception as e:
         db_session.rollback()
         return jsonify({'error': str(e)}), 500
+
 
 # Ruta para iniciar sesión
 @app.route('/login', methods=['POST'])
