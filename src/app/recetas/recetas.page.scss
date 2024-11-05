@@ -1,0 +1,128 @@
+/* Colores personalizados */
+$primary-color: #a08dfd;
+$secondary-color: #3d3d3d;
+$background-color: #1c1c1c;
+$text-color: #ffffff;
+
+/* Fondo oscuro de la aplicación */
+ion-content {
+  --background: $background-color;
+  padding-top: 20px; /* Espacio en la parte superior para el formato iPhone */
+}
+
+/* Encabezado de la página */
+ion-toolbar {
+  --background: $background-color;
+  --color: $text-color;
+}
+
+ion-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: $text-color;
+}
+
+/* Filtros de recetas */
+.recipe-filters {
+  display: flex;
+  justify-content: space-around;
+  margin: 15px 20px;
+
+  ion-chip {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: $text-color;
+
+    &[color="primary"] {
+      --background: $primary-color;
+      --color: $background-color;
+    }
+
+    &[color="secondary"] {
+      --background: #606060;
+      --color: $text-color;
+    }
+  }
+}
+
+/* Receta del día */
+ion-card {
+  background-color: #2e2e2e;
+  color: $text-color;
+  margin: 15px 20px;
+  border-radius: 15px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  ion-card-content {
+    padding: 15px;
+
+    h2 {
+      font-size: 1.1em;
+      font-weight: bold;
+      color: $text-color;
+    }
+
+    p {
+      font-size: 0.9em;
+      color: #ccc;
+    }
+  }
+}
+
+/* Sección de recomendaciones */
+h3 {
+  color: $text-color;
+  font-size: 1.1em;
+  margin: 20px 20px 10px;
+  font-weight: 500;
+}
+
+ion-list {
+  margin: 0 20px;
+
+  ion-item {
+    --background: #2e2e2e;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+
+    ion-thumbnail {
+      border-radius: 8px;
+      overflow: hidden;
+      width: 60px;
+      height: 60px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    ion-label {
+      color: $text-color;
+
+      h2 {
+        font-size: 1em;
+        font-weight: bold;
+        color: $text-color;
+      }
+
+      p {
+        font-size: 0.85em;
+        color: #ccc;
+      }
+    }
+
+    ion-icon {
+      color: $primary-color;
+      font-size: 1.3em;
+    }
+  }
+}

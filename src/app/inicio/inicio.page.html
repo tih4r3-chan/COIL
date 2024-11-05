@@ -1,13 +1,58 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>inicio</ion-title>
+    <ion-title>Hola, Juan Carlos</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="search-outline"></ion-icon>
+      <ion-icon name="notifications-outline"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">inicio</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <!-- Bienvenida y opciones principales -->
+  <div class="greeting">
+    <h2>Es hora de desafiar tus límites.</h2>
+    <div class="icon-menu">
+      <ion-button fill="clear">
+        <ion-icon name="fitness-outline"></ion-icon>
+        <span>Ejercicios</span>
+      </ion-button>
+      <ion-button fill="clear">
+        <ion-icon name="trophy-outline"></ion-icon>
+        <span>Desafíos</span>
+      </ion-button>
+      <ion-button fill="clear">
+        <ion-icon name="restaurant-outline"></ion-icon>
+        <span>Recetas</span>
+      </ion-button>
+      <ion-button fill="clear">
+        <ion-icon name="person-outline"></ion-icon>
+        <span>Perfil</span>
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Ejercicios destacados -->
+  <div class="section">
+    <h3>Ejercicios</h3>
+    <ion-slides>
+      <ion-slide *ngFor="let ejercicio of ejercicios">
+        <ion-card>
+          <img [src]="ejercicio.image" />
+          <ion-card-content>
+            <h2>{{ ejercicio.name }}</h2>
+            <p>{{ ejercicio.duration }} - {{ ejercicio.calories }} Cal</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <!-- Consejo del Día -->
+  <ion-card>
+    <ion-card-header>Consejo Del Día</ion-card-header>
+    <ion-card-content>
+      Come Más Frutas! Son Ricas En Fibra Y Te Ayudarán A Mantenerte Saludable Por Más Tiempo.
+    </ion-card-content>
+  </ion-card>
 </ion-content>

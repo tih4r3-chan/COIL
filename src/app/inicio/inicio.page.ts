@@ -7,8 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioPage implements OnInit {
 
-  constructor() { }
 
+  ejercicios = [
+    {
+      name: 'Trotar',
+      duration: '30 min',
+      calories: '300 cal.',
+      image: 'assets/images/cardio.jpg', 
+    },
+    {
+      name: 'Andar en Bicicleta',
+      duration: '60 min',
+      calories: '550 cal.',
+      image: 'assets/images/fuerza.jpg',
+    }
+  ];
+
+  constructor() { }
   ngOnInit() {
   }
 

@@ -1,0 +1,141 @@
+/* Colores personalizados */
+$primary-color: #a08dfd;
+$secondary-color: #3d3d3d;
+$background-color: #1c1c1c;
+$text-color: #ffffff;
+
+/* Fondo oscuro de la aplicación */
+ion-content {
+  --background: $background-color;
+  padding-top: 20px; /* Para dar espacio en la parte superior del iPhone */
+}
+
+/* Estilos de la barra de herramientas */
+ion-toolbar {
+  --background: $background-color;
+  --color: $text-color;
+}
+
+ion-title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+ion-buttons ion-icon {
+  color: $primary-color;
+  font-size: 1.4em;
+  margin: 0 8px;
+}
+
+/* Sección de saludo y menú de iconos */
+.greeting {
+  padding: 0 20px;
+  color: $text-color;
+
+  h2 {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: $primary-color;
+  }
+
+  .icon-menu {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+
+    ion-button {
+      display: flex;
+      flex-direction: column;
+      color: $primary-color;
+      align-items: center;
+      font-size: 0.85em;
+
+      ion-icon {
+        font-size: 1.6em;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
+
+/* Sección de Ejercicios */
+.section {
+  padding: 0 20px;
+  margin-top: 10px;
+
+  h3 {
+    color: $text-color;
+    font-size: 1.1em;
+  }
+
+  /* Configuración de los slides */
+  ion-slides {
+    --bullet-background: $primary-color;
+    --bullet-background-active: $text-color;
+    margin-top: 10px;
+  }
+
+  /* Estilo para las tarjetas de los ejercicios */
+  ion-card {
+    background-color: #2e2e2e;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 5px;
+    width: 150px;
+
+    img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+    }
+
+    ion-card-content {
+      color: $text-color;
+      padding: 10px;
+
+      h2 {
+        font-size: 0.9em;
+        font-weight: bold;
+      }
+
+      p {
+        font-size: 0.8em;
+        color: #ccc;
+      }
+    }
+  }
+}
+
+/* Consejo del Día */
+ion-card {
+  background-color: #3d3d3d;
+  color: $text-color;
+  margin: 15px 20px;
+  border-radius: 15px;
+
+  ion-card-header {
+    font-size: 1em;
+    font-weight: bold;
+    background-color: $primary-color;
+    color: $background-color;
+    padding: 10px;
+    border-radius: 15px 15px 0 0;
+  }
+
+  ion-card-content {
+    padding: 15px;
+    font-size: 0.9em;
+    color: #ccc;
+  }
+}
+
+/* Menú inferior */
+ion-tab-bar {
+  --background: $background-color;
+  --color: #888;
+  --color-selected: $primary-color;
+}
+
+ion-tab-button {
+  font-size: 0.85em;
+}

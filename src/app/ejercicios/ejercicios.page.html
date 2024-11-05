@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ejercicios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Filtros de dificultad -->
+  <div class="difficulty-filters">
+    <ion-chip color="primary">Principiante</ion-chip>
+    <ion-chip color="secondary">Intermedio</ion-chip>
+    <ion-chip color="tertiary">Avanzado</ion-chip>
+  </div>
+
+  <!-- Entrenamiento del día -->
+  <ion-card>
+    <img src="ruta_entrenamiento_dia" />
+    <ion-card-content>
+      <h2>Entrenamiento Funcional</h2>
+      <p>45 Minutos | 1450 Cal | 5 Ejercicios</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Ejercicios recomendados -->
+  <h3>Principiante</h3>
+  <ion-list>
+    <ion-item *ngFor="let ejercicio of ejercicios">
+      <ion-thumbnail slot="start">
+        <img [src]="ejercicio.image" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ ejercicio.name }}</h2>
+        <p>{{ ejercicio.duration }} - {{ ejercicio.calories }} Cal</p>
+      </ion-label>
+      <ion-icon name="star-outline" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

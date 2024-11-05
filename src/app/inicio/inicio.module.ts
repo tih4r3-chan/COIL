@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
 
 import { InicioPageRoutingModule } from './inicio-routing.module';
 
 import { InicioPage } from './inicio.page';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
   imports: [
@@ -15,11 +15,8 @@ import { InicioPage } from './inicio.page';
     IonicModule,
     InicioPageRoutingModule
   ],
-  declarations: [InicioPage]
+  declarations: [InicioPage],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class InicioPageModule {
-  ejercicios = [
-    { name: 'Trotar', duration: '30 Minutos', calories: '200 Cal', image: 'ruta_imagen_trotar' },
-    { name: 'Andar en Bicicleta', duration: '1 Hora', calories: '550 Cal', image: 'ruta_imagen_bicicleta' },
-  ];
 }
