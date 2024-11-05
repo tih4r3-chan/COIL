@@ -24,7 +24,11 @@ const routes: Routes = [
   {
     path: 'onboarding',
     loadChildren: () => import('./onboarding/onboarding.module').then(m => m.OnboardingPageModule)
+  },  {
+    path: 'inicio',
+    loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule)
   },
+
 ];
 
 @NgModule({
