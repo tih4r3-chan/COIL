@@ -17,4 +17,9 @@ import { InicioPage } from './inicio.page';
   ],
   declarations: [InicioPage]
 })
-export class InicioPageModule {}
+export class InicioPageModule {
+  ejercicios = [
+    { name: 'Trotar', duration: '30 Minutos', calories: '200 Cal', image: 'ruta_imagen_trotar' },
+    { name: 'Andar en Bicicleta', duration: '1 Hora', calories: '550 Cal', image: 'ruta_imagen_bicicleta' },
+  ];
+}
